@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { getWordById } from '@/data';
 import { pinyinToPhonetic } from '@/lib/pinyin-to-phonetic';
+import HanziWriterCard from '@/components/HanziWriterCard';
 import './review.css';
 
 interface DueWord {
@@ -29,6 +30,14 @@ export default function ReviewPage() {
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
+
+  const playAudio = (text: string) => {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'zh-CN';
+    utterance.rate = 0.9;
+    window.speechSynthesis.speak(utterance);
+  };
 
   const handleGrade = async (quality: number) => {
     const current = dueWords[currentIndex];
@@ -117,7 +126,10 @@ export default function ReviewPage() {
       </div>
 
       <div className="review-card glass-panel animate-scale-in" key={currentIndex}>
-        <div className="review-chinese chinese-text">{word.chinese}</div>
+        <div className="review-chinese chinese-text">
+          {word.chinese}
+          <button onClick={() => playAudio(word.chinese)} className="play-audio-btn" title="Listen">🔊</button>
+        </div>
 
         {!showAnswer ? (
           <button className="btn btn-primary btn-lg show-answer-btn" onClick={() => setShowAnswer(true)}>
@@ -125,6 +137,9 @@ export default function ReviewPage() {
           </button>
         ) : (
           <div className="review-answer animate-slide-up" style={{ opacity: 0 }}>
+            <div className="mb-4 flex justify-center">
+               <HanziWriterCard character={word.chinese[0]} mode="quiz" />
+            </div>
             <div className="review-pinyin">{word.pinyin}</div>
             <div className="review-pronunciation pronunciation-guide">
               "{pinyinToPhonetic(word.pinyin)}"

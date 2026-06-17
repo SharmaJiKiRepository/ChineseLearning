@@ -15,6 +15,7 @@
     "@react-three/fiber": "^9.6.1",
     "@react-three/postprocessing": "^3.0.4",
     "@types/three": "^0.184.1",
+    "hanzi-writer": "^3.7.3",
     "nemotron-openrouter-client": "file:../nemotron-client/nemotron-openrouter-client-1.0.0.tgz",
     "next": "16.1.6",
     "react": "19.2.3",

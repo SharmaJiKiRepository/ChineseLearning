@@ -21,7 +21,36 @@ export default function RoleplaySimulator({ aiPrompt, situationTitle }: { aiProm
   const [inputText, setInputText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [translatingId, setTranslatingId] = useState<string | null>(null);
+  const [isListening, setIsListening] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const playAudio = (text: string) => {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'zh-CN';
+    utterance.rate = 0.9;
+    window.speechSynthesis.speak(utterance);
+  };
+
+  const startListening = () => {
+    if (!('webkitSpeechRecognition' in window)) {
+      alert("Your browser doesn't support Speech Recognition. Try Chrome.");
+      return;
+    }
+    const SpeechRecognition = (window as any).webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'zh-CN';
+    recognition.interimResults = false;
+    
+    recognition.onstart = () => setIsListening(true);
+    recognition.onresult = (e: any) => {
+      setInputText(prev => prev + (prev ? ' ' : '') + e.results[0][0].transcript);
+    };
+    recognition.onerror = () => setIsListening(false);
+    recognition.onend = () => setIsListening(false);
+    
+    recognition.start();
+  };
 
   // Initialize chat by sending a hidden system ping to get the AI to start
   useEffect(() => {
@@ -148,7 +177,12 @@ export default function RoleplaySimulator({ aiPrompt, situationTitle }: { aiProm
                 {msg.pinyin && !isUser && (
                   <div className="roleplay-pinyin" style={{ marginBottom: '0.25rem', opacity: 0.9 }}>{msg.pinyin}</div>
                 )}
-                <div className="roleplay-bubble-text">{msg.content}</div>
+                <div className="roleplay-bubble-text">
+                  {msg.content}
+                  {!isUser && (
+                    <button onClick={() => playAudio(msg.content)} className="play-audio-btn" title="Listen">🔊</button>
+                  )}
+                </div>
                 {msg.english && !isUser && (
                   <div className="roleplay-english" style={{ marginTop: '0.25rem', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{msg.english}</div>
                 )}
@@ -204,6 +238,14 @@ export default function RoleplaySimulator({ aiPrompt, situationTitle }: { aiProm
           className="roleplay-input"
           disabled={isLoading}
         />
+        <button 
+          type="button"
+          onClick={startListening}
+          className={`mic-btn ${isListening ? 'listening' : ''}`}
+          title="Speak (Chinese)"
+        >
+          {isListening ? '🔴' : '🎙️'}
+        </button>
         <button 
           type="submit" 
           disabled={!inputText.trim() || isLoading}

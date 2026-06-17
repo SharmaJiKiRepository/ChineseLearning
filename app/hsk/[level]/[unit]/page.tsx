@@ -4,6 +4,7 @@ import { useState, use } from 'react';
 import Link from 'next/link';
 import { getUnit, getGrammarByLevel, HSK_LEVELS } from '@/data';
 import { pinyinToPhonetic } from '@/lib/pinyin-to-phonetic';
+import HanziWriterCard from '@/components/HanziWriterCard';
 import { notFound } from 'next/navigation';
 import './unit.css';
 
@@ -61,6 +62,15 @@ export default function UnitPage({ params }: Props) {
     }
   };
 
+  const playAudio = (e: React.MouseEvent, text: string) => {
+    e.stopPropagation();
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'zh-CN';
+    utterance.rate = 0.9;
+    window.speechSynthesis.speak(utterance);
+  };
+
   return (
     <div className="unit-page animate-fade-in">
       <div className="unit-header">
@@ -87,7 +97,10 @@ export default function UnitPage({ params }: Props) {
                 className="vocab-row"
                 onClick={() => handleWordClick(word.id, word.chinese)}
               >
-                <span className="vocab-chinese chinese-text">{word.chinese}</span>
+                <span className="vocab-chinese chinese-text">
+                  {word.chinese}
+                  <button onClick={(e) => playAudio(e, word.chinese)} className="play-audio-btn" title="Listen">🔊</button>
+                </span>
                 <span className="vocab-pinyin">{word.pinyin}</span>
                 <span className="vocab-pronunciation pronunciation-guide">
                   "{pinyinToPhonetic(word.pinyin)}"
@@ -99,10 +112,17 @@ export default function UnitPage({ params }: Props) {
 
               {expandedWord === word.id && (
                 <div className="vocab-expanded animate-slide-down">
+                  <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
+                    <HanziWriterCard character={word.chinese[0]} mode="animate" />
+                  </div>
+                  
                   {word.exampleSentence && (
                     <div className="example-sentence">
                       <div className="example-label">Example</div>
-                      <div className="example-chinese chinese-text">{word.exampleSentence.chinese}</div>
+                      <div className="example-chinese chinese-text">
+                        {word.exampleSentence.chinese}
+                        <button onClick={(e) => playAudio(e, word.exampleSentence!.chinese)} className="play-audio-btn" title="Listen">🔊</button>
+                      </div>
                       <div className="example-pinyin">{word.exampleSentence.pinyin}</div>
                       <div className="example-pronunciation pronunciation-guide">
                         "{pinyinToPhonetic(word.exampleSentence.pinyin)}"

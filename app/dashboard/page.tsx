@@ -38,6 +38,9 @@ export default function DashboardPage() {
   const correctWords = data?.wordProgress.filter(w => w.lastResult === 'correct').length ?? 0;
   const lessonsCompleted = data?.lessonProgress.filter(l => l.completed).length ?? 0;
   const streak = gamification.streak > 0 ? gamification.streak : (data?.user.streak ?? 0);
+  
+  const xpForNextLevel = gamification.level * 100;
+  const xpProgressPct = Math.min(100, Math.round((gamification.xp / xpForNextLevel) * 100));
 
   return (
     <div className="dashboard-page animate-fade-in">
@@ -49,14 +52,20 @@ export default function DashboardPage() {
       {/* Stats cards */}
       <div className="stats-grid">
         <div className="stat-card glass-panel animate-slide-up stagger-1" style={{ opacity: 0 }}>
-          <div className="stat-icon">🔥</div>
+          <div className="stat-icon streak-flame">🔥</div>
           <div className="stat-value">{streak}</div>
           <div className="stat-name">Day Streak</div>
         </div>
         <div className="stat-card glass-panel animate-slide-up stagger-2" style={{ opacity: 0 }}>
-          <div className="stat-icon">⭐</div>
+          <div className="stat-icon xp-star">⭐</div>
           <div className="stat-value">{gamification.xp}</div>
           <div className="stat-name">Total XP</div>
+          <div className="xp-progress-bar-container">
+            <div className="xp-progress-bar" style={{ width: `${xpProgressPct}%` }}></div>
+          </div>
+          <div style={{ fontSize: '0.7rem', color: 'var(--text-tertiary)', marginTop: '4px' }}>
+            {gamification.xp} / {xpForNextLevel} to next level
+          </div>
         </div>
         <div className="stat-card glass-panel animate-slide-up stagger-3" style={{ opacity: 0 }}>
           <div className="stat-icon">👑</div>

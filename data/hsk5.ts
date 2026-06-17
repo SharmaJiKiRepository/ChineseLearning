@@ -12988,7 +12988,7 @@ export function getHsk5Units(): HskUnit[] {
   hsk5Words.forEach(word => {
     if (!units.has(word.unit)) {
       units.set(word.unit, {
-        level: 5,
+        hskLevel: 5,
         unit: word.unit,
         name: word.unitName,
         words: []

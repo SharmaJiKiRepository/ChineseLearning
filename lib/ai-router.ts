@@ -11,7 +11,7 @@
  */
 
 import { GoogleGenAI, Type, Schema } from '@google/genai';
-import { NemotronClient, NemotronMessage } from 'nemotron-openrouter-client';
+import { NemotronClient, NemotronMessage } from './nemotron-client';
 
 // Initialize Gemini client
 const geminiAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });

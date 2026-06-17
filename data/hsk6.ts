@@ -25011,6 +25011,7 @@ export function getHsk6Units(): HskUnit[] {
         hskLevel: 6,
         unit: word.unit,
         name: word.unitName,
+        description: `HSK 6 Unit ${word.unit}`,
         words: []
       });
     }

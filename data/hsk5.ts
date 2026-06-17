@@ -12991,6 +12991,7 @@ export function getHsk5Units(): HskUnit[] {
         hskLevel: 5,
         unit: word.unit,
         name: word.unitName,
+        description: `HSK 5 Unit ${word.unit}`,
         words: []
       });
     }

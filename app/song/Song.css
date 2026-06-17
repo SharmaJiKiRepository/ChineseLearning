@@ -1,0 +1,141 @@
+.song-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.song-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.song-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.song-header p {
+    color: var(--text-secondary);
+}
+
+.song-input-area {
+    padding: 1.5rem;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.song-textarea {
+    width: 100%;
+    padding: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: var(--text-primary);
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-md);
+    resize: vertical;
+    outline: none;
+    transition: border-color var(--transition-fast);
+}
+
+.song-textarea:focus {
+    border-color: var(--accent-primary);
+}
+
+.song-button {
+    align-self: flex-end;
+    padding: 0.75rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    background: var(--accent-gradient);
+    border-radius: var(--radius-md);
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.song-button:hover:not(:disabled) {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.song-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.lyrics-display {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.lyric-line {
+    padding: 1.5rem;
+    animation: slideUp 0.4s ease-out forwards;
+}
+
+.lyric-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+}
+
+.lyric-chinese {
+    font-size: 2.5rem;
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.lyric-pinyin {
+    font-size: 1.25rem;
+    color: var(--accent-primary);
+    font-weight: 500;
+}
+
+.lyric-pronunciation {
+    font-size: 1.25rem;
+    font-weight: 600;
+    font-family: 'Inter', monospace;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-sm);
+    margin: 0.25rem 0;
+}
+
+.lyric-hindi {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--warning);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-sm);
+    margin-bottom: 0.25rem;
+}
+
+.lyric-meaning {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--surface-border);
+    padding-top: 0.5rem;
+    margin-top: 0.5rem;
+    width: 100%;
+}
+
+.lyric-loading {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+}
+
+.lyric-error {
+    color: var(--error);
+    text-align: center;
+}

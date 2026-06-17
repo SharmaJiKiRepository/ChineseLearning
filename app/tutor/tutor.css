@@ -1,0 +1,269 @@
+.tutor-container {
+  padding: 2rem 0;
+  height: calc(100vh - 8rem);
+}
+
+.tutor-layout {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 2rem;
+  height: 100%;
+}
+
+@media (max-width: 900px) {
+  .tutor-layout {
+    grid-template-columns: 1fr;
+  }
+  .tutor-context-sidebar {
+    display: none;
+  }
+}
+
+/* Chat Section */
+.tutor-chat-section {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 20px;
+}
+
+.tutor-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--surface-border);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.tutor-avatar-container {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.tutor-glow-ring {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: linear-gradient(135deg, #76b900, #3b82f6) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  animation: spin 2s linear infinite;
+  z-index: -1;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+.tutor-header h2 {
+  font-size: 1.4rem;
+  margin-bottom: 0.2rem;
+}
+
+.tutor-status {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.9rem;
+}
+
+.status-text.ready {
+  color: var(--success);
+}
+
+.status-text.typing {
+  color: #76b900; /* Nemotron Green */
+}
+
+/* Messages */
+.tutor-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  scroll-behavior: smooth;
+}
+
+.tutor-msg-wrapper {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  max-width: 85%;
+}
+
+.tutor-msg-wrapper.user {
+  align-self: flex-end;
+  justify-content: flex-end;
+}
+
+.msg-avatar {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-color-solid);
+  border-radius: 50%;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.tutor-bubble {
+  padding: 1rem 1.5rem;
+  border-radius: 18px;
+  line-height: 1.6;
+  font-size: 1.05rem;
+  position: relative;
+  white-space: pre-wrap;
+}
+
+.assistant .tutor-bubble {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--surface-border);
+  border-bottom-left-radius: 4px;
+}
+
+.user .tutor-bubble {
+  background: linear-gradient(135deg, var(--accent-primary), #d92625);
+  color: white;
+  border-bottom-right-radius: 4px;
+  box-shadow: 0 4px 15px rgba(230, 46, 45, 0.3);
+}
+
+/* Quick Actions */
+.quick-actions {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0 1.5rem 1rem 1.5rem;
+  overflow-x: auto;
+}
+
+.quick-actions::-webkit-scrollbar {
+  display: none;
+}
+
+/* Input Area */
+.tutor-input-area {
+  padding: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid var(--surface-border);
+  border-radius: 0 0 20px 20px;
+}
+
+.tutor-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-full);
+  padding: 0 1.5rem;
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.tutor-input:focus {
+  outline: none;
+  border-color: #76b900;
+  box-shadow: 0 0 15px rgba(118, 185, 0, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.tutor-send {
+  border-radius: var(--radius-full);
+  padding: 0 2rem;
+}
+
+/* Sidebar */
+.tutor-context-sidebar {
+  padding: 2rem;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.tutor-context-sidebar h3 {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--surface-border);
+  padding-bottom: 0.5rem;
+}
+
+.stat-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  color: var(--text-tertiary);
+  font-size: 0.9rem;
+}
+
+.stat-value {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.tutor-focus-area h4 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.focus-list {
+  list-style: none;
+  padding: 0;
+}
+
+.focus-list li {
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  border-left: 3px solid var(--accent-secondary);
+}
+
+.nemotron-promo {
+  margin-top: auto;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(118, 185, 0, 0.1), rgba(0, 0, 0, 0));
+  border: 1px solid rgba(118, 185, 0, 0.2);
+  border-radius: 16px;
+  text-align: center;
+}
+
+.nvidia-logo {
+  width: 100px;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+.nemotron-promo p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}

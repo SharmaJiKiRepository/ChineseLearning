@@ -1,0 +1,218 @@
+.dashboard-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+.dash-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.dash-header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.dash-header p { color: var(--text-secondary); font-size: 1.05rem; }
+
+.dash-loading {
+  text-align: center;
+  padding: 4rem;
+  color: var(--text-tertiary);
+}
+
+/* Stats grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+.stat-card {
+  padding: 1.75rem;
+  text-align: center;
+  transition: transform var(--transition-normal);
+}
+
+.stat-card:hover { transform: translateY(-3px); }
+
+.stat-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.stat-name {
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 0.25rem;
+}
+
+/* Level progress */
+.level-progress-section { margin-bottom: 3rem; }
+
+.level-progress-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.level-progress-card {
+  padding: 1.5rem;
+  transition: all var(--transition-normal);
+}
+
+.level-progress-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.lp-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.lp-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: white;
+}
+
+.lp-subtitle {
+  color: var(--text-tertiary);
+  font-size: 0.85rem;
+}
+
+.lp-rings-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+
+.progress-ring-wrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.progress-ring {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.progress-ring-circle-bg {
+  fill: transparent;
+  stroke: rgba(255, 255, 255, 0.05);
+  stroke-width: 8;
+}
+
+.progress-ring-circle {
+  fill: transparent;
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ring-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.ring-val {
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+  line-height: 1;
+}
+
+.ring-lbl {
+  font-size: 0.65rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.lp-stats { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.lp-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.lp-stat-value {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.lp-stat-label {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+/* Quiz history */
+.recent-quizzes { margin-bottom: 3rem; }
+
+.quiz-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.quiz-history-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md);
+}
+
+.qh-badge {
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: white;
+}
+
+.qh-unit {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.qh-score {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+/* Quick actions */
+.quick-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .level-progress-grid { grid-template-columns: 1fr; }
+  .dash-header h1 { font-size: 2rem; }
+}

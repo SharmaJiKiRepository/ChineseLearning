@@ -1,0 +1,281 @@
+.unit-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem 0 4rem;
+}
+
+.unit-header { margin-bottom: 2.5rem; }
+
+.unit-title-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.unit-title-row h1 { font-size: 2.2rem; }
+
+.unit-desc {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+/* Section titles */
+.section-title {
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+  color: var(--text-primary);
+}
+
+/* Vocab list */
+.vocab-section { margin-bottom: 3rem; }
+
+.vocab-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.vocab-item {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: all var(--transition-fast);
+}
+
+.vocab-item.expanded {
+  border-color: rgba(250, 204, 21, 0.3);
+  box-shadow: var(--shadow-glow-gold);
+}
+
+.vocab-row {
+  display: grid;
+  grid-template-columns: 100px 120px 140px 1fr 80px 30px;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.vocab-row:hover {
+  background: var(--surface-hover);
+}
+
+.vocab-chinese {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.vocab-pinyin {
+  color: var(--accent-primary);
+  font-size: 0.95rem;
+}
+
+.vocab-pronunciation {
+  font-size: 0.85rem;
+}
+
+.vocab-meaning {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.vocab-pos {
+  color: var(--text-tertiary);
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.vocab-expand {
+  font-size: 1.2rem;
+  color: var(--text-tertiary);
+  text-align: center;
+}
+
+/* Expanded section */
+.vocab-expanded {
+  padding: 0 1.25rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.example-sentence {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.example-label {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.25rem;
+}
+
+.example-chinese { font-size: 1.2rem; font-weight: 600; }
+.example-pinyin { color: var(--accent-primary); font-size: 0.9rem; }
+.example-pronunciation { font-size: 0.85rem; }
+.example-meaning { color: var(--text-secondary); font-size: 0.9rem; }
+
+.ai-loading {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 0;
+}
+
+.ai-enrichment {
+  background: rgba(250, 204, 21, 0.05);
+  border: 1px solid rgba(250, 204, 21, 0.15);
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ai-label {
+  font-size: 0.8rem;
+  color: var(--accent-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Grammar section */
+.grammar-section { margin-bottom: 3rem; }
+
+.grammar-card {
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.grammar-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--accent-secondary);
+}
+
+.grammar-pattern {
+  font-family: 'Noto Sans SC', monospace;
+  font-size: 1.1rem;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.75rem;
+  border-left: 3px solid var(--accent-secondary);
+}
+
+.grammar-explanation {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.grammar-examples {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.grammar-example {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.75rem;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: var(--radius-sm);
+}
+
+.grammar-example .chinese-text { font-size: 1.1rem; font-weight: 600; }
+.grammar-pinyin { color: var(--accent-primary); font-size: 0.85rem; }
+.grammar-meaning { color: var(--text-secondary); font-size: 0.9rem; }
+
+/* Bottom CTA */
+.unit-bottom-cta {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .vocab-row {
+    grid-template-columns: 80px 1fr 30px;
+  }
+  .vocab-pinyin,
+  .vocab-pronunciation,
+  .vocab-pos { display: none; }
+  .unit-title-row h1 { font-size: 1.5rem; }
+}
+
+/* AI Enrichment Upgrades */
+.enrichment-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+    .enrichment-grid {
+        grid-template-columns: 1fr 2fr;
+    }
+}
+
+.enrichment-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.deep-dive-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.deep-dive-box p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.box-label {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.etymology-box {
+    border-left: 3px solid #3b82f6;
+}
+
+.etymology-box .box-label {
+    color: #3b82f6;
+}
+
+.mnemonic-box {
+    border-left: 3px solid #f59e0b;
+}
+
+.mnemonic-box .box-label {
+    color: #f59e0b;
+}

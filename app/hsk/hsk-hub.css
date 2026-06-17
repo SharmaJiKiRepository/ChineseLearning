@@ -1,0 +1,174 @@
+.hsk-hub {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+.hsk-hub-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.hsk-hub-header h1 {
+  font-size: 3rem;
+  margin-bottom: 0.75rem;
+}
+
+.hsk-hub-header p {
+  color: var(--text-secondary);
+  font-size: 1.15rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.hsk-levels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.hsk-level-card {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.hsk-level-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--level-color);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.hsk-level-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.hsk-level-card:hover::before {
+  opacity: 1;
+}
+
+.level-badge {
+  padding: 0.35rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.05em;
+}
+
+.level-title {
+  font-size: 1.75rem;
+  margin-top: 0.25rem;
+}
+
+.level-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.level-description {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.level-stats {
+  display: flex;
+  gap: 2rem;
+  margin-top: 0.5rem;
+}
+
+.level-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.level-cta {
+  margin-top: 0.75rem;
+  padding: 0.6rem 1.5rem;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: white;
+  transition: all var(--transition-normal);
+}
+
+.hsk-level-card:hover .level-cta {
+  transform: scale(1.05);
+}
+
+/* Total stats bar */
+.hsk-total-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 2rem 3rem;
+  flex-wrap: wrap;
+}
+
+.total-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.total-number {
+  font-size: 2rem;
+  font-weight: 800;
+  font-family: 'Outfit', sans-serif;
+}
+
+.total-label {
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.total-divider {
+  width: 1px;
+  height: 40px;
+  background: var(--surface-border);
+}
+
+@media (max-width: 768px) {
+  .hsk-hub-header h1 { font-size: 2rem; }
+  .hsk-levels-grid { grid-template-columns: 1fr; }
+  .hsk-total-stats { gap: 1.5rem; padding: 1.5rem; }
+  .total-divider { display: none; }
+}

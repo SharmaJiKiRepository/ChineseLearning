@@ -1,0 +1,141 @@
+.level-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem 0 4rem;
+}
+
+.level-header {
+  margin-bottom: 3rem;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-tertiary);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  transition: color var(--transition-fast);
+}
+
+.back-link:hover { color: var(--text-primary); }
+
+.level-title-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.level-tag {
+  padding: 0.3rem 0.9rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.05em;
+}
+
+.level-title-row h1 {
+  font-size: 2.5rem;
+}
+
+.level-desc {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  max-width: 600px;
+  margin-bottom: 0.75rem;
+}
+
+.level-meta {
+  display: flex;
+  gap: 0.75rem;
+  color: var(--text-tertiary);
+  font-size: 0.9rem;
+}
+
+/* Units grid */
+.units-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.unit-card {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.unit-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--level-color);
+  transform: scaleX(0);
+  transition: transform var(--transition-normal);
+}
+
+.unit-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.unit-card:hover::after {
+  transform: scaleX(1);
+}
+
+.unit-number {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.unit-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.unit-word-count {
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+}
+
+.unit-preview {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.preview-char {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.preview-more {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .level-title-row h1 { font-size: 1.75rem; }
+  .units-grid { grid-template-columns: 1fr; }
+}

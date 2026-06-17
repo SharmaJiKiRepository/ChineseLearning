@@ -1,0 +1,144 @@
+.review-page {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+.review-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.review-header h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.review-progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.review-completed {
+  color: var(--success);
+  font-weight: 600;
+}
+
+.review-loading, .review-empty, .review-complete {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.empty-emoji { font-size: 4rem; margin-bottom: 1rem; }
+.review-empty h2, .review-complete h2 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+.review-empty p, .review-complete p { color: var(--text-secondary); max-width: 400px; margin: 0 auto; }
+
+/* Review card */
+.review-card {
+  padding: 3rem 2.5rem;
+  text-align: center;
+}
+
+.review-chinese {
+  font-size: 5rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  line-height: 1.2;
+}
+
+.show-answer-btn { margin: 0 auto; }
+
+.review-answer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.review-pinyin {
+  font-size: 1.5rem;
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.review-pronunciation {
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.review-meaning {
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.review-example {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.75rem 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-sm);
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.review-example .chinese-text { font-size: 1.1rem; }
+.review-example span:last-child { color: var(--text-secondary); font-size: 0.9rem; }
+
+/* Grade buttons */
+.grade-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.grade-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 1rem 0.5rem;
+  border-radius: var(--radius-md);
+  border: 2px solid transparent;
+  transition: all var(--transition-fast);
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--text-primary);
+}
+
+.grade-btn:hover { transform: translateY(-2px); }
+
+.grade-again { border-color: var(--error); }
+.grade-again:hover { background: rgba(239, 68, 68, 0.15); }
+
+.grade-hard { border-color: var(--warning); }
+.grade-hard:hover { background: rgba(250, 204, 21, 0.15); }
+
+.grade-good { border-color: var(--info); }
+.grade-good:hover { background: rgba(59, 130, 246, 0.15); }
+
+.grade-easy { border-color: var(--success); }
+.grade-easy:hover { background: rgba(16, 185, 129, 0.15); }
+
+.grade-label {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.grade-desc {
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+}
+
+@media (max-width: 768px) {
+  .review-card { padding: 2rem 1.5rem; }
+  .review-chinese { font-size: 3.5rem; }
+  .grade-buttons { grid-template-columns: repeat(2, 1fr); }
+}

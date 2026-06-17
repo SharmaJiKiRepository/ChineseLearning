@@ -1,0 +1,160 @@
+.reading-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+.reading-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.reading-header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.reading-header p { color: var(--text-secondary); font-size: 1.05rem; }
+
+/* Controls */
+.reading-controls {
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.filter-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.filter-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+}
+
+.filter-btn.active {
+  background: rgba(250, 204, 21, 0.15);
+  border-color: var(--accent-secondary);
+  color: var(--accent-secondary);
+}
+
+.toggle-row {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.toggle-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.toggle-item input[type="checkbox"] {
+  accent-color: var(--accent-primary);
+}
+
+/* Readings list */
+.readings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.reading-card { overflow: hidden; }
+
+.reading-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.reading-card-header:hover {
+  background: var(--surface-hover);
+}
+
+.reading-badge {
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.reading-card-header h3 {
+  flex: 1;
+  font-size: 1.1rem;
+}
+
+.reading-expand {
+  font-size: 1.3rem;
+  color: var(--text-tertiary);
+}
+
+/* Expanded content */
+.reading-content {
+  padding: 0 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.reading-chinese {
+  font-size: 1.3rem;
+  line-height: 2;
+  letter-spacing: 0.05em;
+  padding-top: 1rem;
+}
+
+.reading-pinyin {
+  color: var(--accent-primary);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.reading-pronunciation {
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+.reading-translation {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: var(--radius-sm);
+}
+
+.reading-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .reading-header h1 { font-size: 2rem; }
+  .reading-chinese { font-size: 1.1rem; }
+}

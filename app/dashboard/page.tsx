@@ -34,10 +34,20 @@ export default function DashboardPage() {
     );
   }
 
-  const wordCount = data?.wordProgress.length ?? 0;
-  const correctWords = data?.wordProgress.filter(w => w.lastResult === 'correct').length ?? 0;
-  const lessonsCompleted = data?.lessonProgress.filter(l => l.completed).length ?? 0;
-  const streak = gamification.streak > 0 ? gamification.streak : (data?.user.streak ?? 0);
+  if (data && 'error' in data) {
+    return (
+      <div className="dashboard-page animate-fade-in">
+        <div className="dash-loading" style={{ color: 'var(--error)' }}>
+          Failed to load progress. Please ensure database is connected.
+        </div>
+      </div>
+    );
+  }
+
+  const wordCount = data?.wordProgress?.length ?? 0;
+  const correctWords = data?.wordProgress?.filter(w => w.lastResult === 'correct').length ?? 0;
+  const lessonsCompleted = data?.lessonProgress?.filter(l => l.completed).length ?? 0;
+  const streak = gamification.streak > 0 ? gamification.streak : (data?.user?.streak ?? 0);
   
   const xpForNextLevel = gamification.level * 100;
   const xpProgressPct = Math.min(100, Math.round((gamification.xp / xpForNextLevel) * 100));
@@ -94,8 +104,8 @@ export default function DashboardPage() {
         <h2 className="section-title">Level Progress</h2>
         <div className="level-progress-grid">
           {HSK_LEVELS.map(level => {
-            const levelLessons = data?.lessonProgress.filter(l => l.hskLevel === level.level && l.completed) ?? [];
-            const levelWords = data?.wordProgress.filter(w => w.wordId.startsWith(`hsk${level.level}-`)) ?? [];
+            const levelLessons = data?.lessonProgress?.filter(l => l.hskLevel === level.level && l.completed) ?? [];
+            const levelWords = data?.wordProgress?.filter(w => w.wordId.startsWith(`hsk${level.level}-`)) ?? [];
             const pctLessons = Math.round((levelLessons.length / level.unitCount) * 100);
             const pctWords = Math.round((levelWords.length / level.wordCount) * 100);
 
@@ -149,11 +159,11 @@ export default function DashboardPage() {
       </div>
 
       {/* Recent quiz results */}
-      {(data?.quizResults.length ?? 0) > 0 && (
+      {(data?.quizResults?.length ?? 0) > 0 && (
         <div className="recent-quizzes">
           <h2 className="section-title">Recent Quizzes</h2>
           <div className="quiz-history-list">
-            {data!.quizResults.slice(0, 8).map((qr, idx) => {
+            {data!.quizResults!.slice(0, 8).map((qr, idx) => {
               const pct = Math.round((qr.score / qr.total) * 100);
               const passed = pct >= 70;
               return (

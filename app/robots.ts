@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/admin/'],
     },
-    sitemap: 'https://learnmandarinfree.com/sitemap.xml',
+    sitemap: 'https://learnmandarinfree.vercel.app/sitemap.xml',
   };
 }

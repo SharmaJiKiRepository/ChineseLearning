@@ -9,11 +9,11 @@ export const metadata: Metadata = {
   title: "Learn Chinese Free Online | 100% Free AI Mandarin Tutor",
   description: "Stop paying for expensive courses. Learn Chinese free from zero to fluent (HSK 1-4). Master thousands of words with our interactive AI tutor, spaced repetition, and real-life dialogue simulator.",
   keywords: "learn chinese free, free mandarin courses, learn chinese online, free chinese app, AI chinese tutor, HSK practice, learn mandarin free",
-  metadataBase: new URL('https://learnmandarinfree.com'),
+  metadataBase: new URL('https://learnmandarinfree.vercel.app'),
   openGraph: {
     title: 'Learn Chinese Free Online | 100% Free AI Mandarin Tutor',
     description: 'Learn Chinese from zero to fluent with interactive dialogues, AI roleplay, and spaced repetition flashcards. No subscriptions, 100% free.',
-    url: 'https://learnmandarinfree.com',
+    url: 'https://learnmandarinfree.vercel.app',
     siteName: 'LearnMandarinFree',
     locale: 'en_US',
     type: 'website',
@@ -41,7 +41,7 @@ export default function RootLayout({
               "@type": "EducationalOrganization",
               "name": "LearnMandarinFree",
               "description": "A completely free, AI-powered platform for learning Chinese language and Mandarin pronunciation from HSK 1 to HSK 4.",
-              "url": "https://learnmandarinfree.com",
+              "url": "https://learnmandarinfree.vercel.app",
               "sameAs": [
                 "https://twitter.com/learnmandarinfree",
                 "https://youtube.com/learnmandarinfree"

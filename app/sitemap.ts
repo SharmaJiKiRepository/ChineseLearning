@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { situations } from '@/data/situations';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://learnmandarinfree.com';
+  const baseUrl = 'https://learnmandarinfree.vercel.app';
 
   const routes = [
     '',

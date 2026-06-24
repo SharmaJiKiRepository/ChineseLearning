@@ -1,16 +1,24 @@
 import { NextResponse } from 'next/server';
-import { generateNemotronResponse } from '@/lib/nemotron';
+import { callAI, extractJSON } from '@/lib/call-ai';
+import { Type } from '@google/genai';
+
+const ROLEPLAY_SCHEMA = {
+    type: Type.OBJECT,
+    properties: {
+        response: { type: Type.STRING, description: 'The Chinese response' },
+        pinyin: { type: Type.STRING, description: 'The pinyin for the Chinese response' },
+        english: { type: Type.STRING, description: 'The English translation of the response' },
+        correction: { type: Type.STRING, description: 'Grammar/vocabulary correction if any, empty string if none' }
+    },
+    required: ['response', 'pinyin', 'english', 'correction']
+};
 
 export async function POST(req: Request) {
     try {
-        const body = await req.json();
-        const { messages, systemInstruction } = body;
+        const { messages, systemInstruction } = await req.json();
+        if (!messages?.length) return NextResponse.json({ error: 'Messages array is required' }, { status: 400 });
 
-        if (!messages || !Array.isArray(messages)) {
-            return NextResponse.json({ error: 'Messages array is required' }, { status: 400 });
-        }
-
-        const enhancedSystemInstruction = `${systemInstruction}
+        const enhancedSystem = `${systemInstruction}
 
 CRITICAL: You MUST respond ONLY with a raw JSON object and nothing else. Do not use Markdown blocks (no \`\`\`json). The JSON object must have exactly these keys:
 {
@@ -20,72 +28,31 @@ CRITICAL: You MUST respond ONLY with a raw JSON object and nothing else. Do not 
   "correction": "If the user made a grammar or vocabulary mistake in their previous message, explain the correction here in English. If no mistake, return empty string."
 }`;
 
-        const fullMessages = [
-            { role: 'system', content: enhancedSystemInstruction } as const,
-            ...messages.map((m: any) => ({ role: m.role as 'user' | 'assistant', content: m.content }))
-        ];
+        const { text, model } = await callAI({
+            systemPrompt: enhancedSystem,
+            messages,
+            nemotronOpts: { enable_thinking: false },
+            geminiSchema: ROLEPLAY_SCHEMA,
+            temperature: 0.7,
+            maxTokens: 1024
+        });
 
-        let rawResponse = '';
-        let modelUsed = 'nemotron';
-
-        try {
-            rawResponse = await generateNemotronResponse(
-                fullMessages,
-                { enable_thinking: false, temperature: 0.7, max_tokens: 1024 }
-            );
-        } catch (nemotronError) {
-            console.warn('Nemotron failed, falling back to Gemini:', nemotronError);
-            const { generateWithGeminiFallback } = await import('@/lib/gemini-fallback');
-            const { Type } = await import('@google/genai');
-            
-            const contents = messages.map((msg: any) => ({
-                role: msg.role === 'assistant' ? 'model' : 'user',
-                parts: [{ text: msg.content }],
-            }));
-            
-            const responseSchema = {
-                type: Type.OBJECT,
-                properties: {
-                    response: { type: Type.STRING, description: 'The Chinese response' },
-                    pinyin: { type: Type.STRING, description: 'The pinyin for the Chinese response' },
-                    english: { type: Type.STRING, description: 'The English translation of the response' },
-                    correction: { type: Type.STRING, description: 'If the user made a grammar or vocabulary mistake in their previous message, explain the correction here in English. If no mistake, return empty string.' }
-                },
-                required: ['response', 'pinyin', 'english', 'correction']
-            };
-            
-            rawResponse = await generateWithGeminiFallback(
-                contents,
-                enhancedSystemInstruction,
-                responseSchema,
-                0.7,
-                1024
-            );
-            
-            modelUsed = 'gemini';
-        }
-
-        // Parse JSON
         let parsed;
         try {
-            const cleaned = rawResponse.replace(/```json/g, '').replace(/```/g, '').trim();
-            parsed = JSON.parse(cleaned);
+            parsed = extractJSON(text);
         } catch {
-            parsed = { response: rawResponse, pinyin: '', english: '', correction: 'Failed to parse JSON response.' };
+            parsed = { response: text, pinyin: '', english: '', correction: 'Failed to parse JSON response.' };
         }
 
-        return NextResponse.json({ 
-            response: parsed.response || rawResponse,
+        return NextResponse.json({
+            response: parsed.response || text,
             pinyin: parsed.pinyin || '',
             english: parsed.english || '',
             correction: parsed.correction || '',
-            _modelUsed: modelUsed
+            _modelUsed: model
         });
     } catch (error: any) {
         console.error('Roleplay API Error:', error);
-        return NextResponse.json(
-            { error: error.message || 'Failed to process roleplay response' },
-            { status: 500 }
-        );
+        return NextResponse.json({ error: error.message || 'Failed to process roleplay response' }, { status: 500 });
     }
 }

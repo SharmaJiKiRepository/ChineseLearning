@@ -1,14 +1,10 @@
 import { NextResponse } from 'next/server';
-import { generateNemotronResponse } from '@/lib/nemotron';
+import { callAI } from '@/lib/call-ai';
 
 export async function POST(req: Request) {
     try {
-        const body = await req.json();
-        const { messages, userContext } = body;
-
-        if (!messages || !Array.isArray(messages)) {
-            return NextResponse.json({ error: 'Messages array is required' }, { status: 400 });
-        }
+        const { messages, userContext } = await req.json();
+        if (!messages?.length) return NextResponse.json({ error: 'Messages array is required' }, { status: 400 });
 
         const systemPrompt = `You are a personalized, highly intelligent Chinese language tutor powered by NVIDIA Nemotron 3 Ultra.
 Your goal is to help the user master Mandarin Chinese.
@@ -24,50 +20,17 @@ Instructions:
 4. Always ask a follow-up question to keep them practicing.
 Keep responses highly educational, but don't overwhelm beginners. Use Pinyin where appropriate.`;
 
-        // Nemotron 3 Ultra requires the system prompt as the first message
-        const fullMessages = [
-            { role: 'system', content: systemPrompt } as const,
-            ...messages.map((m: any) => ({ role: m.role as 'user' | 'assistant', content: m.content }))
-        ];
-
-        let responseContent;
-        let modelUsed = 'nemotron';
-
-        try {
-            responseContent = await generateNemotronResponse(
-                fullMessages,
-                { enable_thinking: true, reasoning_budget: 1024, temperature: 0.7, max_tokens: 2048 }
-            );
-        } catch (nemotronError) {
-            console.warn('Nemotron failed, falling back to Gemini:', nemotronError);
-            const { generateWithGeminiFallback } = await import('@/lib/gemini-fallback');
-            
-            const contents = messages.map((msg: any) => ({
-                role: msg.role === 'assistant' ? 'model' : 'user',
-                parts: [{ text: msg.content }],
-            }));
-            
-            responseContent = await generateWithGeminiFallback(
-                contents,
-                systemPrompt,
-                undefined,
-                0.7,
-                1024
-            );
-            
-            modelUsed = 'gemini';
-        }
-
-        return NextResponse.json({
-            response: responseContent,
-            _modelUsed: modelUsed
+        const { text, model } = await callAI({
+            systemPrompt,
+            messages,
+            nemotronOpts: { enable_thinking: true, reasoning_budget: 1024 },
+            temperature: 0.7,
+            maxTokens: 2048
         });
 
+        return NextResponse.json({ response: text, _modelUsed: model });
     } catch (error: any) {
         console.error('Tutor API Error:', error);
-        return NextResponse.json(
-            { error: error.message || 'Failed to process tutor response' },
-            { status: 500 }
-        );
+        return NextResponse.json({ error: error.message || 'Failed to process tutor response' }, { status: 500 });
     }
 }

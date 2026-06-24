@@ -8,6 +8,7 @@
   z-index: 50;
   padding: 0.5rem 1.25rem;
   border-radius: var(--radius-full);
+  overflow: visible !important; /* Override glass-panel overflow:hidden so dropdown works */
 }
 
 .navbar-container {

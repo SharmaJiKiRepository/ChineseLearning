@@ -91,3 +91,7 @@ export const immersionVideos: ImmersionVideo[] = [
     ]
   }
 ];
+
+export function getImmersionVideoById(id: string) {
+  return immersionVideos.find(v => v.id === id);
+}
